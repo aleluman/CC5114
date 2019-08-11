@@ -18,8 +18,6 @@ class Perceptron:
         else:
             return 0
 
-    v_output = np.vectorize(output)
-
     def learn(self, inputs, learning_rate, desired_output):
         diff = desired_output - self.output(inputs)
         self.weights = self.weights + (learning_rate * inputs * diff)
