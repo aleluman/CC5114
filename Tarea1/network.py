@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import random
 
 
@@ -22,7 +23,7 @@ class Network:
     def loss(self, data):
         calculated_output = np.array([self.feed(sample[0]) for sample in data])
         real_output = [sample[1] for sample in data]
-        loss = ((calculated_output - real_output) ** 2).mean()
+        loss = (np.square(calculated_output - real_output)).mean()
         return loss
 
     def backward_propagation(self, x, y):
@@ -61,16 +62,22 @@ class Network:
         partition = (len(data) // 10) * 8
         test_data = data[partition:]
         training_data = data[:partition]
-        for i in range(iterations):
+        for i in range(iterations + 1):
             random.shuffle(training_data)
             self.update_parameters(training_data)
             correct = self.evaluate(test_data)
-            print("Epoch {} : {} / {}".format(i, correct, len(test_data)))
+            error = self.loss(training_data)
             self.plotx.append(i)
             self.ploty.append(correct)
-            self.error.append(self.loss(training_data))
+            self.error.append(error)
+            if i % 25 == 0:
+                print("Epoch {} : {:.2f}% correct, loss: {:.4f}".format(i, (correct / len(test_data)) * 100, error))
 
     def evaluate(self, data):
-        test_results = [np.argmax(self.feed(sample[0]))for sample in data]
+        test_results = [np.argmax(self.feed(sample[0])) for sample in data]
         real_outputs = [np.argmax(sample[1]) for sample in data]
         return sum(int(x == y) for (x, y) in zip(test_results, real_outputs))
+
+    def plot_results(self):
+        plt.plot(self.plotx, self.error)
+        plt.show()
