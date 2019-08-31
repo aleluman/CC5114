@@ -1,15 +1,8 @@
 import numpy as np
-from sklearn.model_selection import KFold
 
 
 def normalize(array, nh=1, nl=0):
-    dh = np.amax(array)
-    dl = np.amin(array)
-    return (array - dl) * ((nh - nl) / (dh - dl)) + nl
-
-
-def denormalize(array, dh, dl, nh=1, nl=0):
-    return ((dl - dh) * array - (nh * dl) + (dh * nl)) / (nl - nh)
+    return (array - array.min(0)) * ((nh - nl) / array.ptp(0)) + nl
 
 
 def one_hot_encoding(array):
@@ -28,10 +21,3 @@ def encode(array, encoding):
     for i in array:
         encoded.append(encoding[i])
     return encoded
-
-
-def decode(array, encoding):
-    decoded = []
-    for i in array:
-        decoded.append(encoding.keys()[encoding.values().index(i)])
-    return decoded

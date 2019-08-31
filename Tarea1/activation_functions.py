@@ -14,4 +14,15 @@ def tanh(x):
 
 
 def tanh_d(x):
-    return 1 - np.square(tanh(x))
+    return 1 - (tanh(x) ** 2)
+
+
+def rrelu(x):
+    x = np.maximum(x, 0.01 * x)
+    return x
+
+
+def rrelu_d(x):
+    x[x < 0] = 0.01
+    x[x >= 0] = 1
+    return x
