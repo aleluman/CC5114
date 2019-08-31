@@ -8,7 +8,7 @@ np.random.seed(99)
 
 # methods to select the dataset for training
 def train_seeds():
-    data, x_len, y_len = load_data_wrapper("seeds_dataset.txt", range(0, 7), [7])
+    data, x_len, y_len = load_data_wrapper("data/seeds_dataset.txt", range(0, 7), [7])
     net = Network([x_len, 12, 5, y_len], tanh, tanh_d, 0.05)
     net.train(data, 2000)
     print("Confusion matrix for the seed dataset: ")
@@ -17,7 +17,7 @@ def train_seeds():
 
 
 def train_iris():
-    data, x_len, y_len = load_data_wrapper("iris.data", range(0, 4), [4], delimiter=",", output_type="str")
+    data, x_len, y_len = load_data_wrapper("data/iris.data", range(0, 4), [4], delimiter=",", output_type="str")
     net = Network([x_len, 8, 5, y_len], sigmoid, sigmoid_d, 0.5)
     net.train(data, 2000)
     print("Confusion matrix for the iris dataset: ")
