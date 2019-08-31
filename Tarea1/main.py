@@ -6,7 +6,7 @@ import numpy as np
 random.seed(99)
 np.random.seed(99)
 
-
+# methods to select the dataset for training
 def train_seeds():
     data, x_len, y_len = load_data_wrapper("seeds_dataset.txt", range(0, 7), [7])
     net = Network([x_len, 12, 5, y_len], tanh, tanh_d, 0.05)
@@ -26,7 +26,7 @@ def train_iris():
 
 
 if __name__ == "__main__":
-    dataset = input("Select dataset (0: Seed dataset, anything else: Iris dataset): ")
+    dataset = input("Select dataset (0: Seed dataset, Anything else: Iris dataset): ")
     if dataset == '0':
         train_seeds()
     else:

@@ -4,6 +4,8 @@ import random
 
 
 class Network:
+    """Class to represent a basic neural network and its parameters. Includes methods to train
+    the network on specified data and output its results"""
     def __init__(self, layers, activation_function, derivative, learning_rate):
         self.layers = layers
         self.activation_function = activation_function
