@@ -14,6 +14,9 @@ class Network:
         self.plotx = []
         self.ploty = []
         self.error = []
+        self.confusion_actual = []
+        self.confusion_predicted = []
+        self.test_data_size = 0
 
     def feed(self, inp):
         for bias, weight in zip(self.biases, self.weights):
@@ -25,6 +28,26 @@ class Network:
         real_output = [sample[1] for sample in data]
         loss = (np.square(calculated_output - real_output)).mean()
         return loss
+
+    def train(self, data, iterations):
+        random.shuffle(data)
+        partition = (len(data) // 10) * 7
+        test_data = data[partition:]
+        training_data = data[:partition]
+        self.test_data_size = len(test_data)
+        for i in range(iterations + 1):
+            random.shuffle(training_data)
+            self.update_parameters(training_data)
+            correct = self.evaluate(test_data)
+            error = self.loss(training_data)
+            self.plotx.append(i)
+            self.ploty.append(correct)
+            self.error.append(error)
+            if i % 25 == 0:
+                print("Epoch: {}, correct:{:.2f}%, loss: {:.4f}".format(
+                    i, (correct / self.test_data_size) * 100, error))
+        self.confusion_actual = [np.argmax(self.feed(sample[0])) for sample in test_data]
+        self.confusion_predicted = [np.argmax(sample[1]) for sample in test_data]
 
     def backward_propagation(self, x, y):
         dB = [np.zeros(b.shape) for b in self.biases]
@@ -57,27 +80,35 @@ class Network:
         self.weights = [w - (self.learning_rate / len(data)) * dw for w, dw in zip(self.weights, dW)]
         self.biases = [b - (self.learning_rate / len(data)) * db for b, db in zip(self.biases, dB)]
 
-    def train(self, data, iterations):
-        random.shuffle(data)
-        partition = (len(data) // 10) * 8
-        test_data = data[partition:]
-        training_data = data[:partition]
-        for i in range(iterations + 1):
-            random.shuffle(training_data)
-            self.update_parameters(training_data)
-            correct = self.evaluate(test_data)
-            error = self.loss(training_data)
-            self.plotx.append(i)
-            self.ploty.append(correct)
-            self.error.append(error)
-            if i % 25 == 0:
-                print("Epoch {} : {:.2f}% correct, loss: {:.4f}".format(i, (correct / len(test_data)) * 100, error))
-
     def evaluate(self, data):
         test_results = [np.argmax(self.feed(sample[0])) for sample in data]
         real_outputs = [np.argmax(sample[1]) for sample in data]
         return sum(int(x == y) for (x, y) in zip(test_results, real_outputs))
 
+    def confusion_matrix(self):
+        K = len(np.unique(self.confusion_actual))
+        result = np.zeros((K, K), dtype="int_")
+        for i in range(len(self.confusion_actual)):
+            result[self.confusion_actual[i]][self.confusion_predicted[i]] += 1
+        sums_y = np.sum(result, axis=0)
+        sums_x = np.sum(result, axis=1)
+        labels = np.array(range(len(result)))
+        print("           Actual labels")
+        print("            ", *labels, sep="  ")
+        for i in range(len(result)):
+            print("Predicted", labels[i], result[i], sums_x[i])
+        print("            ", *sums_y)
+        return result, sums_x, sums_y
+
     def plot_results(self):
+        plt.figure(figsize=(9, 3))
+        plt.subplot(121)
         plt.plot(self.plotx, self.error)
+        plt.ylabel("loss")
+        plt.xlabel("epoch")
+        plt.subplot(122)
+        plt.plot(self.plotx, (np.array(self.ploty) / self.test_data_size) * 100)
+        plt.ylim([0, 100])
+        plt.ylabel("accuracy (%)")
+        plt.xlabel("epoch")
         plt.show()
