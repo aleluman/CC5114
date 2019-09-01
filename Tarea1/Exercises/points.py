@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 class Points:
-    def __init__(self, n_points, seed):
+    def __init__(self, n_points):
         self.n_points = n_points
         self.points = []
         self.outputs = np.zeros(n_points)
@@ -23,11 +23,13 @@ class Points:
 
 
 def plot_points(n):
-    points = Points(10000, 54)
+    points = Points(10000)
     perceptron = Perceptron(random.random(
     ) * 2 - 1, np.array([random.random() * 2 - 1, random.random() * 2 - 1]))
     for i in range(n):
         perceptron.learn(points.points[i], 0.1, points.outputs[i])
+        if i % 50 == 0:
+            print("Iteration: {}".format(i))
     real_outputs = [perceptron.output(x) for x in points.points]
     x_points = [x[0] for x in points.points]
     y_points = [x[1] for x in points.points]
@@ -44,7 +46,7 @@ def plot_points(n):
 
 
 def plot_error(k):
-    points = Points(k, 45)
+    points = Points(k)
     errors = np.array([])
     perceptron = Perceptron(random.random(
     ) * 2 - 1, np.array([random.random() * 2 - 1, random.random() * 2 - 1]))
@@ -54,6 +56,8 @@ def plot_error(k):
                                  for x in points.points[:100]])
         errors = np.append(
             errors, 1 - np.abs(real_outputs - points.outputs[:100]).mean())
+        if n % 50 == 0:
+            print("Iteration: {}".format(n))
     plt.plot(range(k), errors)
     plt.ylim(0, 1)
     plt.show()
@@ -61,3 +65,4 @@ def plot_error(k):
 
 if __name__ == '__main__':
     plot_error(10000)
+    plot_points(1000)

@@ -1,6 +1,5 @@
 import unittest
 import numpy as np
-import math
 
 
 class Perceptron:
@@ -14,10 +13,15 @@ class Perceptron:
         assert self.weights.size == inputs.size, "Mismatch between inputs and weights size."
         self.result = np.sum(self.weights * inputs)
         z = self.result + self.bias
-        return self.sigmoid(z)
+        return self.step(z)
 
     def sigmoid(self, z):
         return 1 / (1 + np.exp(-z))
+
+    def step(self, z):
+        if z > 0:
+            return 1
+        return 0
 
     def learn(self, inputs, learning_rate, desired_output):
         diff = desired_output - self.output(inputs)
