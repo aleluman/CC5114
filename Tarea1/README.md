@@ -1,2 +1,2 @@
-![Alt Text](/images/iris.png)
-![Alt Text](/images/seed.png)
+![Alt Text](/Tarea1/images/iris.png)
+![Alt Text](/Tarea1/images/seed.png)
