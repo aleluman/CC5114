@@ -3,15 +3,15 @@ import numpy as np
 
 def normalize(matrix, nh=1, nl=0):
     """Normalizes each column in a matrix by calculating its maximum
-    and minimun values, the parameters nh and nl specify the final range
+    and minimum values, the parameters nh and nl specify the final range
     of the normalized values"""
     return (matrix - matrix.min(0)) * ((nh - nl) / matrix.ptp(0)) + nl
 
 
 def one_hot_encoding(array):
-    """Encodes each unique label in 'array' in a vector of the same lenght as 
+    """Encodes each unique label in 'array' in a vector of the same length as
     the number of unique labels. This vector is filled with zeros and a 1
-    representing the position asigned to the label"""
+    representing the position assigned to the label"""
     labels = np.unique(array)
     number_of_labels = labels.size
     encoded = {}
@@ -40,7 +40,7 @@ def load_data_wrapper(name, input_cols, output_col, output_type="float", delimit
     data_y = np.loadtxt(name, usecols=output_col, delimiter=delimiter, dtype=output_type)
     encoding = one_hot_encoding(data_y)
     data_y = encode(data_y, encoding)
-    #x_len will be the number of input neurons, and y_len the number of output neurons
+    # x_len will be the number of input neurons, and y_len the number of output neurons
     x_len = np.shape(data_x)[1]
     y_len = np.shape(data_y)[1]
     data = [[np.reshape(x, (x_len, 1)), np.reshape(y, (y_len, 1))] for x, y in zip(data_x, data_y)]
