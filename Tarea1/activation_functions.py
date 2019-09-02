@@ -25,13 +25,11 @@ def tanh_d(x):
 
 def rrelu(x):
     """returns the value of x evaluated on the rectified linear unit function"""
-    x = np.maximum(x, 0.01 * x)
+    x = np.where(x <= 0, 0.01 * x, x)
     return x
 
 
 def rrelu_d(x):
-    """returns the value of x evaluated on the derivative 
+    """returns the value of x evaluated on the derivative
     of the rectified linear unit function"""
-    x[x <= 0] = 0.01
-    x[x > 0] = 1
-    return x
+    return np.where(x <= 0, 0.01, 1)
