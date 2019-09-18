@@ -3,14 +3,11 @@ from network import *
 from activation_functions import *
 import numpy as np
 
-random.seed(99)
-np.random.seed(99)
-
 
 # methods to select the dataset for training
 def train_seeds():
     data, x_len, y_len = load_data_wrapper("data/seeds_dataset.txt", range(0, 7), [7])
-    net = Network([x_len, 12, 5, y_len], tanh, tanh_d, 0.05)
+    net = Network([x_len, 12, y_len], rrelu, rrelu_d, 0.2)
     net.train(data, 2000)
     print("Confusion matrix for the seed dataset: ")
     net.confusion_matrix()
