@@ -1,4 +1,4 @@
-from Exercises.individual import *
+from individual import *
 import string
 
 
