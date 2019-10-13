@@ -38,9 +38,9 @@ class Population:
 def f():
     return random.choice(string.ascii_lowercase)
 
-
+palabra = list("hola hola hola asdasdasdasdas")
+    
 def fit(x):
-    palabra = ['h', 'o', 'l', 'a']
     n = 0
     for i in range(len(x.genes)):
         if palabra[i] == x.genes[i]:
@@ -50,7 +50,7 @@ def fit(x):
 
 if __name__ == "__main__":
     pop = Population(100, 0.01, fit)
-    pop.generate_individuals(f, 4)
+    pop.generate_individuals(f, len(palabra))
     for i in range(100):
         pop.calculate_fitness()
         pop.reproduce()
