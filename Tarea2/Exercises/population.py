@@ -2,6 +2,8 @@ from individual import *
 import string
 
 
+palabra = list("hola hola hola asdasdasdasdas")
+
 class Population:
     def __init__(self, pop_size, mutation_rate, fitness_function):
         self.population_size = pop_size
@@ -38,7 +40,6 @@ class Population:
 def f():
     return random.choice(string.ascii_lowercase)
 
-palabra = list("hola hola hola asdasdasdasdas")
     
 def fit(x):
     n = 0
