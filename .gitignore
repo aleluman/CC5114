@@ -16,6 +16,7 @@ eggs/
 .eggs/
 lib/
 lib64/
+*.egg
 parts/
 sdist/
 var/
@@ -24,7 +25,7 @@ pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
-*.egg
+*.json
 MANIFEST
 
 # PyInstaller
@@ -194,9 +195,13 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 .idea/CC5114.iml
+<<<<<<< HEAD
 .idea/inspectionProfiles/profiles_settings.xml
 Tarea1/data/poker.data
 .idea/vcs.xml
 .idea/.gitignore
 .idea/misc.xml
 .idea/modules.xml
+=======
+Tarea2/.vscode/settings.json
+>>>>>>> e49ccdde93c27756091e95d5c121baba764dc2cd

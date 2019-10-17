@@ -1,6 +1,6 @@
 from individual import *
 from statistics import mean
-
+import string
 
 class Population:
     def __init__(self, pop_size, mutation_rate, fitness_function):
@@ -48,3 +48,25 @@ class Population:
                     "Generation {}, best individual: {}, average fitness: {}".format(self.generation, individual,
                                                                                      fitness))
             self.generation += 1
+
+def f():
+    return random.choice(string.ascii_lowercase)
+
+    
+def fit(x):
+    n = 0
+    for i in range(len(x.genes)):
+        if palabra[i] == x.genes[i]:
+            n += 1
+    return n
+
+
+if __name__ == "__main__":
+    pop = Population(100, 0.01, fit)
+    pop.generate_individuals(f, len(palabra))
+    for i in range(100):
+        pop.calculate_fitness()
+        pop.reproduce()
+        pop.mutate_all()
+        print([x.genes for x in pop.population])
+
