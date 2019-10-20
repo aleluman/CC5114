@@ -8,10 +8,14 @@ ITERATIONS = 100
 
 
 def gene_f():
+    """each gene is represented by a tuple with a determined weight
+    and value. The tuple (0, 0) was added to represent no choice"""
     return random.choice([(12, 4), (2, 2), (1, 2), (1, 1), (4, 10), (0, 0)])
 
 
 def fitness_f(x):
+    """calculates the total value and weight, if the weight is over 15, 
+    the individual receives a penalization with 0 fitness"""
     weight = 0
     value = 0
     for i in range(len(x.genes)):

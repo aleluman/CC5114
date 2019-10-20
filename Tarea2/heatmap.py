@@ -1,6 +1,11 @@
 from knapsack import *
 import numpy as np
 
+"""displays a heat map to determine the optimal configuration of hyperparameters
+on the knapsack problem. WARNING: takes a lot of time to calculate"""
+
+# population range from 50 to 1000 every 50 steps
+# mutation range from 0 to 1 in 0.1 steps
 pop_range = np.arange(50, 1050, 50)
 mut_range = np.arange(0, 1.1, 0.1)
 
