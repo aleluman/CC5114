@@ -21,11 +21,13 @@ del tipo (1, 1) que aún cumplen con el requisito de no sobrepasar el peso
 ### Resultados
 En primer lugar se hizo un gráfico de como evoluciona la población en el problema knapsack para una población de 1000 individuos con una tasa de mutaciópn del 10%:
 ![fitness evolution](/Tarea2/img/Figure_2.png)
+
 Se puede observar que el máximo valor de fitness se alcanza a las 20 generaciones, al igual que el fitness promedio de la población.
 
 Luego se hizo un gráfico de configuración de hiperparámetros (cantidad de individuos y tasa de mutación) para poder observar los parámetros óptimos
 que permiten llevar a la solución:
 ![configuration heatmap](/Tarea2/img/Figure_1.png)
+
 Lo que se codifica en color es el fitness promedio de la población hasta encontrar el óptimo (o superar las 200 generaciones, en tal caso el óptimo no se encontró).
 
 ### Análisis
