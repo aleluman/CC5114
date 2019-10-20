@@ -19,9 +19,9 @@ if __name__ == "__main__":
             rating.append(y2[-1])
             print("Computing... population size = {}, mutation rate = {}".format(i, j))
     rating = np.array(rating).reshape(pop_range.size, mut_range.size)
-    plt.imshow(rating,extent=[pop_range.min(),pop_range.max(),mut_range.min(),mut_range.max()], aspect="auto")
-    plt.xlabel("population size")
-    plt.ylabel("mutation rate")
+    plt.imshow(rating,extent=[mut_range.min(),mut_range.max(),pop_range.min(),pop_range.max()], aspect="auto")
+    plt.ylabel("population size")
+    plt.xlabel("mutation rate")
     plt.colorbar()
     plt.show()
 
