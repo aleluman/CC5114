@@ -1,6 +1,7 @@
+from arboles import *
 # un AST es un arbol que representa un programa, la idea aqui es tener 
 # un generador, que pueda generar ASTs aleatorios
-class AST:
+class AST: 
     def __init__(self, allowed_functions, allowed_terminals, prob_terminal=0.3):
         # las funciones (nodos en nuestro caso) que nuestro programa puede tener
         self.functions = allowed_functions

@@ -25,7 +25,7 @@ class Node:
         self.arguments = []
         
     # funcion para evaluar un nodo (calcular el resultado)
-    def eval(self):
+    def eval(self, dict_val = None):
         # es importante chequear que los argumentos que nos dieron
         # coincidan con los argumentos que necesitamos
         assert len(self.arguments) == self.num_arguments
