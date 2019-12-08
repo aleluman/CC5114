@@ -80,7 +80,7 @@ class Population:
         """calls the mutate method for each individual of the population"""
         [ind.mutate() for ind in self.population]
 
-    def evolve(self, print_info=True, iterations=200000, fitness_limit=1000):
+    def evolve(self, print_info=True, iterations=200000, fitness_limit=1000, dict_val = None):
         """evolves the population by reproducing the best individuals based on the fitness function, mutates them 
         calculates their fitness. Returns three arrays with the minimum, average and maximum fitness on each 
         generation. The population can be evolved either until a maximum number of iterations is reached or until
@@ -104,7 +104,7 @@ class Population:
                 individual = self.population[self.individual_fitness.index(
                     max(self.individual_fitness))].genes
                 print(
-                    "Generation {}, best individual: {}, average fitness: {}".format(self.generation, individual.eval(),
+                    "Generation {}, best individual fitness: {}, average fitness: {}".format(self.generation, max_fitness[-1],
                                                                                    avg_fitness[-1]))
             self.generation += 1
             n += 1

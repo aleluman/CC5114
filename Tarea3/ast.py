@@ -1,4 +1,5 @@
-from arboles import *
+from arboles import TerminalNode
+import random
 # un AST es un arbol que representa un programa, la idea aqui es tener 
 # un generador, que pueda generar ASTs aleatorios
 class AST: 

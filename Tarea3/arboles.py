@@ -38,7 +38,7 @@ class Node:
         # esto se llama `unpacking`.
         # lo necesitamos porque nuestra funcion recibe N argumentos
         # no una lista de tamaño N.
-        return self.operation(*[node.eval() for node in self.arguments])
+        return self.operation(*[node.eval(dict_val = dict_val) for node in self.arguments])
     
     # hace una lista con todos los hijos
     def serialize(self):
@@ -116,6 +116,16 @@ class MultNode(BinaryNode):
         
     def __repr__(self):
         return "({} * {})".format(*self.arguments)
+
+
+class DivNode(BinaryNode):
+    def __init__(self, left, right):
+        def _div(x,y):
+            return x / y
+        super(DivNode, self).__init__(_div, left, right)
+        
+    def __repr__(self):
+        return "({} / {})".format(*self.arguments)
     
     
 class TerminalNode(Node):
@@ -132,6 +142,10 @@ class TerminalNode(Node):
     def __repr__(self):
         return str(self.value)
     
-    def eval(self):
+    def eval(self, dict_val = None):
         # la evaluacion de un nodo terminal es el valor que contiene
-        return self.value
+        if not isinstance(self.value, str):
+            return self.value
+        else:
+            assert (dict_val is not None)
+            return dict_val.get(self.value)
