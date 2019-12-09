@@ -22,23 +22,33 @@ Las funciones de fitness fueron todas normalizadas para que su rango esté entre
 
 Los siguientes gráficos muestran la evolución del fitness en cada generación para cada uno de los ejercicios. Cabe destacar que en todos se encontró una expresión equivalente a lo pedido exceptuando el ejercicio sin repetir nodos terminales (en donde de todas formas se consiguió un fitness alto), que se decidió terminar en la generación 1000. Todos los demás ejercicios terminaron al llegar al fitness óptimo (1):
 ![img1](/Tarea3/img/1.png)
+
 En este primer gráfico se llegó bastante rápido a la solución con los hiperparámetros seleccionados, sin embargo para otros hiperparámetros tomaba mucho más tiempo o derechamente el programa no podía seguir ejecutándose.
 
 
+
 ![img2](/Tarea3/img/2.png)
+
 En el segundo caso la ejecución tomó muchas más generaciones, pero cada iteración tomaba bastante menos tiempo.
 
 
+
 ![img3](/Tarea3/img/3.png)
+
 En el caso sin repetición de nodos terminales se puede observar que el fitness medio se mantuvo muy bajo, debido a que los árboles que repetían nodos tenían automáticamente fitness 0.
 
 
+
 ![img4](/Tarea3/img/4.png)
+
 Al buscar x²+x-6 se tuvo la suerte de escoger buenos hiperparámetros por lo que se encontró una expresión equivalente de forma bastante rápida.
 
 
+
 ![img5](/Tarea3/img/5.png)
+
 En el caso de la división tomó más generaciones, pero de todas formas la ejecución fue rápida.
+
 
 ### Análisis
 A continuación se presenta un heatmap para diferentes configuraciones de los hiperparámetros de tamaño de la población y tasa de mutación. El heatmap muestra la cantidad de generaciones que tomó encontrar la solución óptima en el problema de encontrar el número 65346 limitando el tamaño de los árboles. Se estableció un máximo de 50 generaciones para limitar el tiempo de cálculo. Se utilizaron valores en los rangos [50, 500] y [0, 1].
