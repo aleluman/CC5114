@@ -19,10 +19,10 @@ class Individual:
 
     def mutate(self):
         """checks for a chance to mutate a gene in the tree"""
-        serial_genes = self.genes.serialize()
-        choice = random.randint(0, len(serial_genes) - 1)
         if random.random() <= self.mutation_rate:
-            serial_genes[choice].replace(self.generate_a_gene())
+            serial_genes = self.genes.serialize()
+            choice = random.choice(serial_genes)
+            choice.replace(self.generate_a_gene(max_depth=4))
 
     def __str__(self):
         """prints to an appropiate format"""
@@ -66,8 +66,7 @@ class Population:
         return self.population[self.individual_fitness.index(max(choices))]
 
     def crossover(self, ind1, ind2):
-        """selects randomly the index of a gene (n) and reproduces two individuals with the genetic information
-        from the first from index 0 to n - 1 and genetic information of the second from n to the end"""
+        """selects a node from a parent tree and copies it as a subtree for a copy of another parent"""
         new_element = ind1.genes.copy()
         p1 = random.choice(new_element.serialize())
         p2 = random.choice(ind2.genes.serialize()).copy()

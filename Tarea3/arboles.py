@@ -25,6 +25,7 @@ class Node:
         self.arguments = []
         
     # funcion para evaluar un nodo (calcular el resultado)
+    # en el diccionario dict_val se guardan valores para variables
     def eval(self, dict_val = None):
         # es importante chequear que los argumentos que nos dieron
         # coincidan con los argumentos que necesitamos
@@ -144,8 +145,10 @@ class TerminalNode(Node):
     
     def eval(self, dict_val = None):
         # la evaluacion de un nodo terminal es el valor que contiene
+        # solo si no es un string
         if not isinstance(self.value, str):
             return self.value
+        # si es un string busco en el diccionario
         else:
             assert (dict_val is not None)
             return dict_val.get(self.value)
